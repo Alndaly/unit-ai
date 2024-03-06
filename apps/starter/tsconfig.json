@@ -1,0 +1,26 @@
+{
+    "extends": "@unit-ai/typescript-config/node.json",
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "esnext",
+        "sourceMap": false,
+        "moduleResolution": "Node",
+        "skipLibCheck": true,
+        "strict": true,
+        "isolatedModules": true,
+        "declaration": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "outDir": "./dist",
+        "rootDir": "./src"
+    },
+    "include": [
+        "**/*.ts",
+        "**/*.d.ts",
+    ],
+    "exclude": [
+        "**/*.spec.ts",
+        "**/*.test.ts",
+        "./dist/**/*"
+    ]
+}

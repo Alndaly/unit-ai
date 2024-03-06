@@ -1,0 +1,88 @@
+{
+	"name": "@unit-ui/starter",
+	"description": "A simple app.",
+	"version": "0.0.0",
+	"productName": "Unit AI",
+	"author": {
+		"name": "Kinda Hall",
+		"email": "1142704468@qq.com"
+	},
+	"main": "./main/dist/index.js",
+	"private": true,
+	"scripts": {
+		"pre-package": "node --loader ts-node/esm scripts/pre-package.mts",
+		"make": "electron-builder --mac",
+		"dev": "nodemon -e ts,tsx --exec node --loader ts-node/esm scripts/esbuild.dev.mts",
+		"build": "node --loader ts-node/esm scripts/esbuild.prod.mts",
+		"clean": "node --loader ts-node/esm scripts/clean.mts"
+	},
+	"build": {
+		"appId": "com.kinda.unit-ai",
+		"files": [
+			"**/*",
+			"!**/src",
+			"!/dist",
+			"!/node_modules",
+			"!/out"
+		],
+		"extraResources": [],
+		"directories": {
+			"buildResources": "assets",
+			"output": "out"
+		},
+		"nsis": {
+			"oneClick": false,
+			"allowElevation": true,
+			"allowToChangeInstallationDirectory": true,
+			"createDesktopShortcut": "always",
+			"createStartMenuShortcut": true,
+			"shortcutName": "Unit AI"
+		},
+		"mac": {
+			"icon": "logo.icns",
+			"category": "public.app-category.productivity",
+			"target": [
+				{
+					"target": "dmg",
+					"arch": [
+						"arm64"
+					]
+				}
+			]
+		},
+		"electronDownload": {
+			"mirror": "https://npmmirror.com/mirrors/electron/"
+		},
+		"npmRebuild": true,
+		"afterSign": "./scripts/after-sign.js",
+		"publish": [
+			{
+				"provider": "github",
+				"owner": "Alndaly",
+				"repo": "unit-ai"
+			}
+		]
+	},
+	"dependencies": {
+		"@unit-ai/backend": "workspace:*",
+		"crypto": "^1.0.1",
+		"electron-store": "^8.1.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"electron": "^29.1.0",
+		"@types/fs-extra": "^11.0.4",
+		"@types/node": "^20.10.6",
+		"@types/react": "^18.2.46",
+		"@types/react-dom": "^18.2.18",
+		"@unit-ai/typescript-config": "workspace:*",
+		"electron-builder": "^24.13.3",
+		"electron-is-dev": "^3.0.1",
+		"esbuild": "^0.20.1",
+		"fs-extra": "^11.2.0",
+		"nodemon": "^3.1.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.3.3"
+	}
+}

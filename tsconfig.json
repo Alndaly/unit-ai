@@ -1,0 +1,3 @@
+{
+  "extends": "@unit-ai/typescript-config/base.json"
+}

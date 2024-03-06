@@ -1,0 +1,21 @@
+{
+	"name": "unit-ai",
+	"private": true,
+	"scripts": {
+		"dev": "turbo dev",
+		"build": "turbo build",
+		"pre-package": "turbo pre-package",
+		"make": "turbo make",
+		"clean": "turbo clean",
+    "serve": "turbo serve"
+	},
+	"devDependencies": {
+		"@unit-ai/typescript-config": "workspace:*",
+		"prettier": "^3.1.1",
+		"turbo": "latest"
+	},
+	"packageManager": "pnpm@8.9.0",
+	"engines": {
+		"node": ">=18"
+	}
+}
