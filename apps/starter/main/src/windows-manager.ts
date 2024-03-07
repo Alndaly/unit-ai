@@ -1,4 +1,4 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, ipcMain } from "electron";
 import isDev from "electron-is-dev";
 import * as path from "path";
 /**
@@ -9,6 +9,7 @@ class WindowManager {
 
   constructor() {
     this.mainWindow = null;
+    this.initEventListener();
   }
 
   createMainWindow = async () => {
@@ -35,6 +36,27 @@ class WindowManager {
     window.show();
   }
 
+  initEventListener = () => {
+    ipcMain.handle('maxmize-window', async () => {
+      this.mainWindow && this.mainWindow.maximize();
+    });
+
+    ipcMain.handle('unmaxmize-window', async () => {
+      this.mainWindow && this.mainWindow.unmaximize();
+    });
+
+    ipcMain.handle('minimize-window', async () => {
+      this.mainWindow && this.mainWindow.minimize();
+    });
+
+    ipcMain.handle('close-window', async () => {
+      this.mainWindow && this.mainWindow.close();
+    });
+
+    ipcMain.handle('is-maxmize', async () => {
+      return this.mainWindow && this.mainWindow.isMaximized();
+    });
+  }
 }
 
 export const windowManger = new WindowManager();

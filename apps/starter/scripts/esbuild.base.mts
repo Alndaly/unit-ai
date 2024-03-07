@@ -17,3 +17,14 @@ export const MainBuildConfig: BuildOptions = {
     sourcemap: true,
     external: ['electron', 'node-pty', "regedit", ...builtinModules],
 }
+
+export const PreloadBuildConfig: BuildOptions = {
+    entryPoints: [path.resolve(__dirname, "../preload/", "./src/index.ts")],
+    outfile: path.resolve(__dirname, "../preload/", "./dist/index.js"),
+    bundle: true,
+    platform: 'node',
+    minify: false,
+    target: 'chrome98',
+    sourcemap: true,
+    external: ['electron', ...builtinModules], // Add external dependencies here
+}
