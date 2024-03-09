@@ -1,30 +1,13 @@
-import * as Configstore from 'electron-store';
+import * as path from "path"
+import isDev from "electron-is-dev"
 
-class UnitAiConfigManager {
-    private config: Configstore;
+export const devUrlPrefix = "http://localhost:3000"
+export const pathPrefix = path.resolve(__dirname, "../../dist")
 
-    constructor(configName: string) {
-        // 初始化 Configstore 实例
-        this.config = new Configstore({ name: configName });
+export function resolveViewPath(pagePath: string): string {
+    let realPagePath = pagePath
+    if (pagePath === "/index" && isDev) {
+        realPagePath = ""
     }
-
-    // 获取配置项
-    get(key: string): any {
-        return this.config.get(key);
-    }
-
-    // 设置配置项
-    set(key: string, value: any): void {
-        this.config.set(key, value);
-    }
-
-    // 删除配置项
-    delete(key: string): void {
-        this.config.delete(key);
-    }
+    return isDev ? `${devUrlPrefix}${realPagePath}` : `${pathPrefix}${realPagePath}.html`
 }
-
-// 示例用法
-const appConfigManager = new UnitAiConfigManager('config');
-
-export { appConfigManager }

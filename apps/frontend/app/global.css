@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	color-scheme: light dark;
+}
+
+.toolbar {
+	-webkit-app-region: drag;
+	height: 36px;
+}
+
+.toolbar > * {
+	-webkit-app-region: no-drag;
+}

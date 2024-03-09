@@ -1,23 +1,14 @@
 import { contextBridge, ipcRenderer } from "electron";
 
-contextBridge.exposeInMainWorld("unitAiElectronApi", {
-    name: "unitAiElectronApi",
-    version: 0.1,
-    windowTabManager: {
-        maxmizeWindow: async () => {
-            await ipcRenderer.invoke('maxmize-window');
+contextBridge.exposeInMainWorld("electronApi", {
+    windowManager: {
+        getMainWindowViews: async () => {
+            const ret = await ipcRenderer.invoke('get-main-window-views');
+            return ret
         },
-        unmaxmizeWindow: async () => {
-            await ipcRenderer.invoke('unmaxmize-window');
-        },
-        minimizeWindow: async () => {
-            await ipcRenderer.invoke('minimize-window');
-        },
-        closeWindow: async () => {
-            await ipcRenderer.invoke('close-window');
-        },
-        isMaxmized: async () => {
-            return await ipcRenderer.invoke('is-maxmize');
-        },
+        switchTab: async (id: string) => {
+            const ret = await ipcRenderer.invoke('switch-tab', id);
+            return ret
+        }
     }
 });
