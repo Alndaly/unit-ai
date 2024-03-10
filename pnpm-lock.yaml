@@ -59,6 +59,9 @@ importers:
       '@types/mdx':
         specifier: ^2.0.11
         version: 2.0.11
+      classnames:
+        specifier: ^2.5.1
+        version: 2.5.1
       electron:
         specifier: ^29.1.0
         version: 29.1.0
@@ -83,6 +86,9 @@ importers:
       remark-gfm:
         specifier: ^4.0.0
         version: 4.0.0
+      zustand:
+        specifier: ^4.5.2
+        version: 4.5.2(@types/react@18.2.63)(react@18.2.0)
     devDependencies:
       '@types/node':
         specifier: ^20.10.6
@@ -111,6 +117,9 @@ importers:
 
   apps/starter:
     dependencies:
+      '@types/qs':
+        specifier: ^6.9.12
+        version: 6.9.12
       '@unit-ai/backend':
         specifier: workspace:*
         version: link:../backend
@@ -120,6 +129,9 @@ importers:
       electron-store:
         specifier: ^8.1.0
         version: 8.1.0
+      qs:
+        specifier: ^6.12.0
+        version: 6.12.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1233,7 +1245,6 @@ packages:
 
   /@types/qs@6.9.12:
     resolution: {integrity: sha512-bZcOkJ6uWrL0Qb2NAWKa7TBU+mJHPzhx9jjLL1KHF+XpzEcR7EXHvjbHlGtR/IsP1vyPrehuS6XqkmaePy//mg==}
-    dev: true
 
   /@types/range-parser@1.2.7:
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
@@ -1951,6 +1962,10 @@ packages:
 
   /classcat@5.0.4:
     resolution: {integrity: sha512-sbpkOw6z413p+HDGcBENe498WM9woqWHiJxCq7nvmxe9WmrUmqfAcxpIwAiMtM5Q3AhYkzXcNQHqsWq0mND51g==}
+    dev: false
+
+  /classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
     dev: false
 
   /cli-truncate@2.1.0:
@@ -4501,6 +4516,13 @@ packages:
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.6
+
+  /qs@6.12.0:
+    resolution: {integrity: sha512-trVZiI6RMOkO476zLGaBIzszOdFPnCCXHPG9kn0yuS1uz6xdVxPfZdB3vUig9pxPFDM9BRAgz/YUIVQ1/vuiUg==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.6
+    dev: false
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}

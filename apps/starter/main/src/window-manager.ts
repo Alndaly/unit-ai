@@ -1,4 +1,4 @@
-import { app, nativeTheme, ipcMain, BrowserWindow } from 'electron'
+import { BrowserWindow } from 'electron'
 import * as path from 'path'
 
 class WindowManager {
@@ -27,6 +27,11 @@ class WindowManager {
             }
         })
         this.windows.set("main", window);
+    }
+
+    destroyWindow = (id: string) => {
+        const window = this.windows.get(id);
+        window && window.destroy()
     }
 
 }

@@ -17,26 +17,38 @@ app.setAboutPanelOptions({
 
 ipcMain.handle('get-main-window-views', () => {
     if (mainWindowViewManager?.views) {
-        return Array.from(mainWindowViewManager?.views.values()).map(item => {
+        const views = Array.from(mainWindowViewManager.views.values()).map(item => {
             return { id: item.id, title: item.title, path: item.path }
-        }).filter(item => item.title)
+        })
+            .filter(item => item.title !== 'root')
+        const active = mainWindowViewManager.active
+        return {
+            views, active
+        }
     }
 })
 
-ipcMain.handle('switch-tab', (event, id: string) => {
+ipcMain.handle('get-side-bar-width', (event, id: string) => {
+    return mainWindow && mainWindow.getBounds().y
+})
+
+ipcMain.handle('get-tab-bar-height', (event, id: string) => {
+    return mainWindow && mainWindow.getBounds().y
+})
+
+ipcMain.handle('switch-view', (event, id: string) => {
     mainWindowViewManager && mainWindowViewManager.setView(id)
 })
 
-ipcMain.handle('delete-tab', (event, id: string) => {
+ipcMain.handle('delete-view', (event, id: string) => {
     mainWindowViewManager && mainWindowViewManager.deleteView(id)
 })
 
-ipcMain.handle('add-tab', (event, { title, path, query }) => {
+ipcMain.handle('add-view', (event, { title, path, query }) => {
     if (mainWindowViewManager) {
-        const newViewItem = mainWindowViewManager.addView({ title, path: resolveViewPath(path), query })
+        const newViewItem = mainWindowViewManager.addView({ title, path: resolveViewPath(path, query) })
         mainWindowViewManager.setView(newViewItem.id)
     }
-
 })
 
 app.on('ready', async () => {
@@ -51,11 +63,10 @@ app.on('ready', async () => {
     if (mainWindow) {
         mainWindowViewManager = new ViewManager(mainWindow)
         mainWindow.show()
-        const rootView = mainWindowViewManager.addView({ path: resolveViewPath('/index') })
+        const rootView = mainWindowViewManager.addView({ title: 'root', path: resolveViewPath('/root') })
         mainWindowViewManager.setView(rootView.id)
         const homeView = mainWindowViewManager.addView({ title: 'home', path: resolveViewPath('/home') })
         mainWindowViewManager.setView(homeView.id)
-        homeView.broswerView.webContents.openDevTools()
     }
 })
 

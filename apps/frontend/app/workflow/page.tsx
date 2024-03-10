@@ -1,6 +1,8 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
+import { useSystemStore } from '@/store/system';
 import ReactFlow, {
 	MiniMap,
 	Controls,
@@ -19,6 +21,8 @@ const initialNodes = [
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 export default function App() {
+	const searchParams = useSearchParams();
+	const { tabBarHeight, onInit } = useSystemStore();
 	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -26,9 +30,18 @@ export default function App() {
 		(params) => setEdges((eds) => addEdge(params, eds)),
 		[setEdges]
 	);
+	
+	useEffect(() => {
+		onInit();
+		const id = searchParams.get('id');
+		alert(id)
+	}, []);
 
 	return (
-		<div style={{ width: '100vw', height: '100vh' }}>
+		<div
+			style={{
+				height: `calc( 100vh - ${tabBarHeight}px )`,
+			}}>
 			<ReactFlow
 				nodes={nodes}
 				edges={edges}

@@ -64,19 +64,21 @@
 		]
 	},
 	"dependencies": {
+		"@types/qs": "^6.9.12",
 		"@unit-ai/backend": "workspace:*",
 		"crypto": "^1.0.1",
 		"electron-store": "^8.1.0",
+		"qs": "^6.12.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"electron": "^29.1.0",
 		"@types/fs-extra": "^11.0.4",
 		"@types/node": "^20.10.6",
 		"@types/react": "^18.2.46",
 		"@types/react-dom": "^18.2.18",
 		"@unit-ai/typescript-config": "workspace:*",
+		"electron": "^29.1.0",
 		"electron-builder": "^24.13.3",
 		"electron-is-dev": "^3.0.1",
 		"esbuild": "^0.20.1",

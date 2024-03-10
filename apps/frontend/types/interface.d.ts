@@ -1,18 +1,18 @@
-interface TabItem {
-    title: string,
-    path: string,
-    query?: string
-}
 interface Window {
-    darkMode: {
-        toggle: () => void
-    },
     electronApi: {
+        windowInfo: {
+            getSideBarWidth: () => Promise<number>,
+            getTabBarHeight: () => Promise<number>,
+        },
         windowManager: {
-            getMainWindowViews: () => any,
-            switchTab: (id: string) => any,
-            addTab: (tabItem: TabItem) => any,
-            deleteTab: (id: string) => any
+            getMainWindowViews: () => Promise<{ active: string, views: { title: string, id: string }[] }>,
+            addView: (view: { title: string, path: string, query?: { [key: string]: string } }) => void,
+            deleteView: (id: string) => void,
+            switchView: (id: string) => void,
+            onMainViewsChange: (callback: (viewsData: {
+                views: { title: string, id: string }[];
+                active: string;
+            }) => void) => void
         }
     }
 }
