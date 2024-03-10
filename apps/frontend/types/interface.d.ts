@@ -1,3 +1,8 @@
+interface TabItem {
+    title: string,
+    path: string,
+    query?: string
+}
 interface Window {
     darkMode: {
         toggle: () => void
@@ -5,7 +10,9 @@ interface Window {
     electronApi: {
         windowManager: {
             getMainWindowViews: () => any,
-            switchTab: (id: string) => any
+            switchTab: (id: string) => any,
+            addTab: (tabItem: TabItem) => any,
+            deleteTab: (id: string) => any
         }
     }
 }

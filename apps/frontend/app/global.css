@@ -8,7 +8,7 @@
 
 .toolbar {
 	-webkit-app-region: drag;
-	height: 36px;
+	height: 38px;
 }
 
 .toolbar > * {

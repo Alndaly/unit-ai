@@ -13,6 +13,9 @@ export default function Page(): JSX.Element {
 		{
 			label: 'Settings',
 		},
+		{
+			label: 'About',
+		},
 	];
 	const workFlows = [
 		{
@@ -80,6 +83,12 @@ export default function Page(): JSX.Element {
 						{workFlows.map((workFlow, index) => {
 							return (
 								<div
+									onClick={() =>
+										window.electronApi.windowManager.addTab({
+											title: workFlow.name,
+											path: '/workflow',
+										})
+									}
 									key={index}
 									className='flex flex-col rounded overflow-hidden hover:outline cursor-pointer'>
 									<img

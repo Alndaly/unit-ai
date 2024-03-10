@@ -9,6 +9,14 @@ contextBridge.exposeInMainWorld("electronApi", {
         switchTab: async (id: string) => {
             const ret = await ipcRenderer.invoke('switch-tab', id);
             return ret
+        },
+        addTab: async ({ title, path, query }: { title: string, path: string, query: string }) => {
+            const ret = await ipcRenderer.invoke('add-tab', { title, path, query });
+            return ret
+        },
+        deleteTab: async (id: string) => {
+            const ret = await ipcRenderer.invoke('delete-tab', id);
+            return ret
         }
     }
 });

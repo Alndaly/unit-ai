@@ -1,4 +1,6 @@
-const withMDX = require('@next/mdx')()
+import createMDX from '@next/mdx'
+import remarkGfm from 'remark-gfm'
+
 const isProd = process.env.NODE_ENV === 'production'
 
 /** @type {import('next').NextConfig} */
@@ -9,4 +11,12 @@ const nextConfig = {
     assetPrefix: isProd ? '.' : '',
 };
 
-module.exports = withMDX(nextConfig)
+const withMDX = createMDX({
+    // Add markdown plugins here, as desired
+    options: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [],
+    },
+})
+
+export default withMDX(nextConfig)

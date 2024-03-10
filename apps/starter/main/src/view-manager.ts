@@ -5,7 +5,7 @@ import * as path from "path";
 
 interface ViewItem {
   id?: string,
-  title: string,
+  title?: string,
   path: string,
   query?: string,
   broswerView?: BrowserView
@@ -50,6 +50,12 @@ export class ViewManager {
     }
     this.views.set(viewId, newViewItem)
     return newViewItem
+  }
+
+  deleteView = (id: string) => {
+    const view = this.views.get(id);
+    view?.broswerView && this.window.removeBrowserView(view.broswerView)
+    this.views.delete(id)
   }
 
   setView = (id: string) => {

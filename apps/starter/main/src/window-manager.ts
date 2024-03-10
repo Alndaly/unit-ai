@@ -15,7 +15,6 @@ class WindowManager {
             width: 1200,
             height: 800,
             frame: true,
-            backgroundColor: '#000',
             titleBarStyle: 'hiddenInset',
             webPreferences: {
                 devTools: true,

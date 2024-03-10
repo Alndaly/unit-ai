@@ -1,6 +1,5 @@
 import React from 'react';
 import './global.css';
-import { Provider } from 'react-redux';
 import type { Metadata } from 'next';
 import TabBar from '../components/tabbar';
 
