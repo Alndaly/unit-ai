@@ -18,5 +18,11 @@
 		"nodemon": "^3.1.0",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"@types/fs-extra": "^11.0.4",
+		"fs-extra": "^11.2.0",
+		"lowdb": "^7.0.1",
+		"winston": "^3.12.0"
 	}
 }
