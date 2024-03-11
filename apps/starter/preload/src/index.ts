@@ -25,6 +25,10 @@ contextBridge.exposeInMainWorld("electronApi", {
         switchView: (id: string) => {
             ipcRenderer.invoke('switch-view', id);
         },
+        getViewQuery: async () => {
+            const ret = await ipcRenderer.invoke('get-view-query');
+            return ret
+        },
         onMainViewsChange: (callback: (viewsData: {
             views: { title: string, id: string }[];
             active: string;

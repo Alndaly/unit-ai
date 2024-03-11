@@ -12,7 +12,8 @@ interface Window {
             onMainViewsChange: (callback: (viewsData: {
                 views: { title: string, id: string }[];
                 active: string;
-            }) => void) => void
+            }) => void) => void,
+            getViewQuery: () => Promise<{ [key: string]: string }>
         }
     }
 }

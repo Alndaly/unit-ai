@@ -47,7 +47,7 @@ export class ViewManager {
     rootView?.broswerView.webContents.send('views-change', { views: views, active: this.active })
   }
 
-  addView = (viewBaseData: { title: string, path: string }) => {
+  addView = (viewBaseData: { title: string, path: string, query: { [key: string]: string } }) => {
     const existSameView = Array.from(this.views.values()).find(item => item.title === viewBaseData.title && item.path === viewBaseData.path)
     if (existSameView) {
       this.active = existSameView.id
@@ -70,17 +70,26 @@ export class ViewManager {
     } else {
       view.webContents.loadFile(viewBaseData.path)
     }
+    view.webContents.openDevTools()
     view.setBounds({ x: 0, y: 0, width: 1200, height: 800 })
     const viewId = randomUUID().toString();
     const newViewItem = {
       ...viewBaseData,
       id: viewId,
-      broswerView: view
+      broswerView: view,
     }
     this.views.set(viewId, newViewItem)
     this.window.addBrowserView(view)
     this.dispatchChangeEvent()
     return newViewItem
+  }
+
+  getCurrentView = () => {
+    return this.views.get(this.active!)
+  }
+
+  getView = (id: string) => {
+    return this.views.get(id)
   }
 
   deleteView = (id: string) => {

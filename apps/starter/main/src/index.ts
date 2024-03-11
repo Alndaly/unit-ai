@@ -44,9 +44,15 @@ ipcMain.handle('delete-view', (event, id: string) => {
     mainWindowViewManager && mainWindowViewManager.deleteView(id)
 })
 
+ipcMain.handle('get-view-query', (event) => {
+    if (mainWindowViewManager) {
+        return mainWindowViewManager.getCurrentView()?.query
+    }
+})
+
 ipcMain.handle('add-view', (event, { title, path, query }) => {
     if (mainWindowViewManager) {
-        const newViewItem = mainWindowViewManager.addView({ title, path: resolveViewPath(path, query) })
+        const newViewItem = mainWindowViewManager.addView({ title, path: resolveViewPath(path), query })
         mainWindowViewManager.setView(newViewItem.id)
     }
 })

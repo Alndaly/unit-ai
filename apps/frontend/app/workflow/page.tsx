@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
 import { useSystemStore } from '@/store/system';
 import ReactFlow, {
@@ -10,6 +9,7 @@ import ReactFlow, {
 	useNodesState,
 	useEdgesState,
 	addEdge,
+	BackgroundVariant,
 } from 'reactflow';
 
 import 'reactflow/dist/style.css';
@@ -21,20 +21,23 @@ const initialNodes = [
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 export default function App() {
-	const searchParams = useSearchParams();
 	const { tabBarHeight, onInit } = useSystemStore();
 	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
 	const onConnect = useCallback(
-		(params) => setEdges((eds) => addEdge(params, eds)),
+		(params: any) => setEdges((eds) => addEdge(params, eds)),
 		[setEdges]
 	);
-	
+
+	const onGetViewQuery = async () => {
+		const a = await window.electronApi.windowManager.getViewQuery();
+		console.log(a);
+	};
+
 	useEffect(() => {
 		onInit();
-		const id = searchParams.get('id');
-		alert(id)
+		onGetViewQuery();
 	}, []);
 
 	return (
@@ -50,7 +53,7 @@ export default function App() {
 				onConnect={onConnect}>
 				<Controls />
 				<MiniMap />
-				<Background variant='dots' gap={12} size={1} />
+				<Background variant={BackgroundVariant.Dots} gap={12} size={1} />
 			</ReactFlow>
 		</div>
 	);
