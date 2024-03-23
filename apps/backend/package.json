@@ -21,8 +21,12 @@
 	},
 	"dependencies": {
 		"@types/fs-extra": "^11.0.4",
+		"execa": "^8.0.1",
 		"fs-extra": "^11.2.0",
+		"https-proxy-agent": "^7.0.4",
 		"lowdb": "^7.0.1",
+		"node-fetch": "^3.3.2",
+		"socket.io": "^4.7.5",
 		"winston": "^3.12.0"
 	}
 }

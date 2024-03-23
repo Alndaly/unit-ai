@@ -3,6 +3,7 @@ import { app, ipcMain, BrowserWindow } from 'electron'
 import { windowManger } from './window-manager';
 import { ViewManager } from './view-manager';
 import { resolveViewPath } from './config';
+import { io } from "socket.io-client";
 
 let mainWindow: BrowserWindow | null = null
 let mainWindowViewManager: ViewManager | null = null
@@ -59,9 +60,13 @@ ipcMain.handle('add-view', (event, { title, path, query }) => {
 
 app.on('ready', async () => {
     await startAppServer({
-        port: 4000,
-        staticFolder: null
+        port: 4000
     });
+
+    const socket = io("ws://localhost.com:8001")
+    socket.on('connect', () => {
+        console.log('connected')
+    })
 
     windowManger.createMainWindow();
     mainWindow = windowManger.windows.get('main') ? windowManger.windows.get('main')! : null

@@ -47,7 +47,7 @@ export class ViewManager {
     rootView?.broswerView.webContents.send('views-change', { views: views, active: this.active })
   }
 
-  addView = (viewBaseData: { title: string, path: string, query: { [key: string]: string } }) => {
+  addView = (viewBaseData: { title: string, path: string, query?: { [key: string]: string } }) => {
     const existSameView = Array.from(this.views.values()).find(item => item.title === viewBaseData.title && item.path === viewBaseData.path)
     if (existSameView) {
       this.active = existSameView.id

@@ -1,13 +1,17 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import { createServer } from 'http'
+import { Server } from 'socket.io'
+
+const app = express();
+const server = createServer(app)
+const io = new Server(server);
 
 export async function startAppServer(params: {
   port: number,
-  staticFolder: string | null
+  staticFolder?: string
 }) {
   const { port, staticFolder } = params;
-  const app = express();
-
   staticFolder && app.use(express.static(staticFolder));
   app.use(express.json());
 
@@ -21,8 +25,17 @@ export async function startAppServer(params: {
     res.send('Hello, I\'m Unit AI!');
   });
 
-  app.listen(port, () => {
-    console.log(`Nodejs app listening on port ${port}`)
-  })
+  io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+  });
+
+  server.listen(port, () => {
+    console.log(`后端服务启动成功，监听端口：${port}`);
+  });
 
 }
+
+// startAppServer({ port: 8001 }) # uncomment when you want to debug the backend alone

@@ -1,0 +1,6 @@
+export const appName = 'unit-ai'
+export const appRootDir = 'unit-ai'
+export const appTempDir = 'tmp'
+export const condaEnvName = 'unit-ai'
+export const author = 'Kinda Hall'
+export const authorGithub = 'Alndaly'
