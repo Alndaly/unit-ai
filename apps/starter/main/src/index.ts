@@ -63,9 +63,9 @@ app.on('ready', async () => {
         port: 4000
     });
 
-    const socket = io("ws://localhost.com:8001")
+    const socket = io("http://localhost:4000")
     socket.on('connect', () => {
-        console.log('connected')
+        console.log('前端连接socketio成功')
     })
 
     windowManger.createMainWindow();
