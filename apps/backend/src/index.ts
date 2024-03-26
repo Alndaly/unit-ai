@@ -21,8 +21,12 @@ export async function startAppServer(params: {
     credentials: true,
   }));
 
-  app.get('/api', (req: Request, res: Response) => {
-    res.send('Hello, I\'m Unit AI!');
+  app.get('/api', (request: Request, response: Response) => {
+    response.send('Hello, I\'m Unit AI!');
+  });
+
+  app.get('/test', async (request: Request, response: Response) => {
+    response.send('Hello, I\'m Unit AI!');
   });
 
   io.on('connection', (socket) => {
@@ -38,4 +42,4 @@ export async function startAppServer(params: {
 
 }
 
-// startAppServer({ port: 8001 }) # uncomment when you want to debug the backend alone
+startAppServer({ port: 8001 }) // uncomment when you want to debug the backend alone
